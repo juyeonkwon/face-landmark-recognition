@@ -31,6 +31,7 @@
 ├── data/
 │   └── landmarks.csv      # x, y 좌표만 포함된 랜드마크 데이터셋
 └── README.md
+└── README_ko.md
 ```
 
 ---
