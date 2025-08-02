@@ -1,2 +1,122 @@
-# face-landmark-recognition
-Dlib landmarks + Perspective Transform 기반 얼굴 인식 경량화 프로젝트
+# 🔒 Face Landmark-based Lightweight Recognition
+
+> A privacy-enhancing and computation-efficient face recognition system using coordinate-based input and perspective normalization.
+
+---
+
+## 📌 Introduction
+
+This project proposes a lightweight and privacy-preserving face recognition pipeline that utilizes only the 68 facial landmark coordinates extracted via Dlib, instead of raw facial images. A perspective normalization algorithm is applied to compensate for distortions caused by facial angles and expressions, allowing more robust recognition under diverse poses.
+
+* ✅ No image data used → higher privacy
+* ✅ Landmark coordinate-based learning → reduced input dimensionality
+* ✅ Perspective transformation → normalization for pose-invariant input
+* ✅ Efficient computation with smaller model size
+
+---
+
+## 🗂️ Project Structure
+
+```
+.
+├── src/
+│   ├── main.py            # Main training/inference logic
+│   └── utils.py           # Preprocessing, normalization, and evaluation utilities
+├── results/               # Experimental results (plots, metrics, comparisons)
+│   ├── acc_loss.png
+│   ├── fpr_fnr.png
+│   ├── heatmap.png
+│   └── comparison_metrics.png
+├── data/
+│   └── landmarks.csv      # Landmark-only coordinate dataset (x, y per point)
+└── README.md
+```
+
+---
+
+## 📊 Experimental Results
+
+We compared our coordinate-based method to a traditional image-based approach. While the baseline uses full facial images, our method relies only on coordinate data and achieves superior or comparable performance with significantly reduced computational cost.
+
+| Metric    | Conv. (Image) | Prop. w/o p. transform | Prop. w/ p. transform |
+| --------- | ------------- | ---------------------- | --------------------- |
+| Accuracy  | 0.9733        | 0.9716                 | **0.9817**            |
+| Precision | 0.9901        | 0.9875                 | **0.9908**            |
+| Recall    | 0.9900        | 0.9875                 | **0.9908**            |
+| AUROC     | 0.9997        | 1.0000                 | **1.0000**            |
+
+✅ The coordinate-based method with perspective normalization consistently outperforms both the baseline and the non-normalized version in all metrics.
+
+
+> 🔒 **Privacy**: Landmark-only input ensures no raw facial image is used, and normalized coordinates prevent re-identification.
+> ⚙️ **Efficiency**: Smaller input leads to lower computational overhead and faster convergence.
+> 🧠 All models shared the same architecture (for coordinate-based approaches), allowing fair comparison.
+
+---
+
+## 📂 Notes
+
+* Dataset will be released later, containing only anonymized landmark coordinates.
+* Codebase is under preparation and will be added soon.
+
+---
+
+# 🔒 좌표 기반 경량 얼굴 인식 시스템
+
+> 원근 보정을 활용하여 연산 효율성과 개인정보 보호를 강화한 얼굴 인식 시스템
+
+---
+
+## 📌 개요
+
+본 프로젝트는 기존의 얼굴 이미지 대신 Dlib 기반의 68개 얼굴 랜드마크 좌표만을 활용하여 학습하는 경량형 얼굴 인식 방식을 제안합니다. 이때 원근 변환(perspective transform)을 적용하여 얼굴의 각도나 표정에 따른 왜곡을 보정하고, 다양한 자세에서도 일관된 추론이 가능하도록 합니다.
+
+* ✅ 이미지 데이터 미사용 → 개인정보 보호 강화
+* ✅ 좌표 기반 입력 → 입력 차원 축소 및 연산량 감소
+* ✅ 원근 변환 → 자세 변화에 강건한 입력 정규화
+* ✅ 전체 시스템 경량화
+
+---
+
+## 🗂️ 프로젝트 구조
+
+```
+.
+├── src/
+│   ├── main.py            # 모델 학습 및 추론 로직
+│   └── utils.py           # 전처리, 정규화, 평가 관련 함수
+├── results/               # 실험 결과 이미지 및 지표
+│   ├── acc_loss.png
+│   ├── fpr_fnr.png
+│   ├── heatmap.png
+│   └── comparison_metrics.png
+├── data/
+│   └── landmarks.csv      # x, y 좌표만 포함된 랜드마크 데이터셋
+└── README.md
+```
+
+---
+
+## 📊 실험 결과
+
+기존 얼굴 이미지 기반 인식 방식과 본 프로젝트에서 제안하는 좌표 기반 인식 방법(원근 변환 전/후)을 비교한 결과는 다음과 같습니다. 제안 기법은 보안성, 정확도, 효율성 측면 모두에서 뛰어난 성능을 보였습니다.
+
+| 지표              | Conv. (Image) | Prop. w/o p. transform | Prop. w/ p. transform |
+| --------------- | ------------- | ---------------------- | --------------------- |
+| 정확도 (Accuracy)  | 0.9733        | 0.9716                 | **0.9817**            |
+| 정밀도 (Precision) | 0.9901        | 0.9875                 | **0.9908**            |
+| 재현율 (Recall)    | 0.9900        | 0.9875                 | **0.9908**            |
+| AUROC           | 0.9997        | 1.0000                 | **1.0000**            |
+
+✅ 원근 변환을 적용한 좌표 기반 방식이 전체 지표에서 가장 높은 성능을 기록하였습니다.
+
+> 🔒 **보안성**: 이미지가 아닌 좌표값만을 활용하고, 정규화를 통해 재식별 가능성을 원천 차단합니다.
+> ⚙️ **연산 효율성**: 입력 차원 감소를 통해 학습 속도 및 자원 사용량을 크게 줄였습니다.
+> 🧠 모든 좌표 기반 모델은 동일한 MLP 구조를 사용하여 공정한 비교가 가능합니다.
+
+---
+
+## 📂 참고 사항
+
+* 데이터셋은 랜드마크 좌표만 익명화하여 추후 공개될 예정입니다.
+* 코드베이스는 현재 준비 중이며 곧 추가될 예정입니다.
