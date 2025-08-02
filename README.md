@@ -30,6 +30,7 @@ This project proposes a lightweight and privacy-preserving face recognition pipe
 ├── data/
 │   └── landmarks.csv      # Landmark-only coordinate dataset (x, y per point)
 └── README.md
+└── README_ko.md
 ```
 
 ---
